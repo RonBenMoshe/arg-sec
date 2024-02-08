@@ -26,7 +26,7 @@ pipeline{
                     echo currentBuild.buildCauses.toString()
                     echo "Files:"
                     sh "ls -la"
-                    if(ghprbPullId.isEmpty()){
+                    if(currentBuild.buildCauses.toString().contains('UserIdCause')){
                         ghprbPullId = "manual"
                     }
                     sh """
