@@ -5,7 +5,7 @@ pipeline{
             steps{
             script{
                 echo "Webhook Payload: ${GITHUB_PR_NUMBER}"
-                echo "Test
+                echo "Test"
             }
             }
         }
