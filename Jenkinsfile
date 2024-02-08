@@ -1,6 +1,7 @@
 properties(
     [parameters([
-        choice(name: 'StageToRun',choices: ['Build', 'Deploy'], description: 'Choose the stage to run when running the pipeline manually')
+        choice(name: 'StageToRun',choices: ['Build', 'Deploy'], description: 'Choose the stage to run when running the pipeline manually'),
+        string(name: 'sha1', description: 'branch to build from',defaultValue: 'refs/heads/main')
     ])])
 pipeline{
     agent any
