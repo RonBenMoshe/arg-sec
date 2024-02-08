@@ -6,9 +6,15 @@ pipeline{
     agent any
     triggers {
         cron 'H 17 * * *'
-        githubPullRequests events: [Open(), commitChanged()], spec: '', triggerMode: 'HEAVY_HOOKS'
     }
     stages{
+        stage('Test){
+              steps{
+                  script{
+                      currentBuild.buildCauses.toString()
+                  }
+              }
+        }
         stage('Build'){
             when {
                 anyOf {
