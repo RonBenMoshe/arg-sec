@@ -60,7 +60,7 @@ pipeline{
                     echo currentBuild.buildCauses.toString()
                     withAWS(credentials: 'Aws', region: 'us-east-1') {
                         sh """
-                        latest=\$(aws s3 ls s3://ron-ben.moshe/ --recursive | sort | tail -n 1 | awk '{print \$4}'')
+                        latest=\$(aws s3 ls s3://ron-ben.moshe/ --recursive | sort | tail -n 1 | awk '{print \$4}')
                         aws s3 cp s3://ron-ben.moshe/\$latest /tmp/test.txt
                         [[ -s /tmp/pr.txt ]] && cat /tmp/test.txt || echo "File Empty"
                         """
