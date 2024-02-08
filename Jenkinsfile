@@ -8,7 +8,7 @@ pipeline{
         cron 'H 17 * * *'
     }
     stages{
-        stage('Test){
+        stage('Test'){
               steps{
                   script{
                       currentBuild.buildCauses.toString()
