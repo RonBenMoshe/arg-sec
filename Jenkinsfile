@@ -11,7 +11,7 @@ pipeline{
         stage('Test'){
               steps{
                   script{
-                      currentBuild.buildCauses.toString()
+                      echo currentBuild.buildCauses.toString()
                   }
               }
         }
