@@ -1,7 +1,7 @@
 properties(
     [parameters([
         choice(name: 'StageToRun',choices: ['Build', 'Deploy'], description: 'Choose the stage to run when running the pipeline manually'),
-        string(name: 'sha1', description: 'branch to build from',defaultValue: 'refs/heads/main')
+        string(name: 'sha1', description: 'git ref(could be commit hash or branch) to build from',defaultValue: 'refs/heads/main')
     ])])
 pipeline{
     agent any
@@ -26,7 +26,7 @@ pipeline{
                     echo currentBuild.buildCauses.toString()
                     echo "Files:"
                     sh "ls -la"
-                    if(ghprbPullId.isEmpty()){
+                    if(currentBuild.buildCauses.toString().contains('UserIdCause')){
                         ghprbPullId = "manual"
                     }
                     sh """
@@ -64,8 +64,8 @@ pipeline{
                     withAWS(credentials: 'Aws', region: 'us-east-1') {
                         sh """
                         latest=\$(aws s3 ls s3://ron-ben.moshe/ --recursive | sort | tail -n 1 | awk '{print \$4}')
-                        aws s3 cp s3://ron-ben.moshe/\$latest /tmp/test.txt
-                        [[ -s /tmp/pr.txt ]] && cat /tmp/test.txt || echo "File Empty"
+                        aws s3 cp s3://ron-ben.moshe/\$latest test.txt
+                        [ -s test.txt ] && cat /tmp/test.txt || echo "File Empty"
                         """
                     }
                 }
