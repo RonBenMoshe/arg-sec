@@ -26,6 +26,9 @@ pipeline{
                     echo currentBuild.buildCauses.toString()
                     echo "Files:"
                     sh "ls -la"
+                    if(ghprbPullId.isEmpty()){
+                        ghprbPullId = "manual"
+                    }
                     sh """
                         docker build -t 161192472568.dkr.ecr.us-east-1.amazonaws.com/ron-ben.moshe:${ghprbPullId} .
                         mkdir -p data
