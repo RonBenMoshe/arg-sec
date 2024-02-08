@@ -11,7 +11,7 @@ pipeline{
     stages{
         stage('Build'){
             when {
-                anyof {
+                anyOf {
                     expression {
                         params.StageToRun == 'Build' && currentBuild.buildCauses.toString().contains('UserIdCause')
                     }
