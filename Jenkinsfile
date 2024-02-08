@@ -8,13 +8,6 @@ pipeline{
         cron 'H 17 * * *'
     }
     stages{
-        stage('Test'){
-              steps{
-                  script{
-                      echo currentBuild.buildCauses.toString()
-                  }
-              }
-        }
         stage('Build'){
             when {
                 anyOf {
@@ -22,7 +15,7 @@ pipeline{
                         params.StageToRun == 'Build' && currentBuild.buildCauses.toString().contains('UserIdCause')
                     }
                     expression {
-                        currentBuild.buildCauses.toString().contains('GitHubPRCause')
+                        currentBuild.buildCauses.toString().contains('GhprbCause')
                     }
                 
                 }
