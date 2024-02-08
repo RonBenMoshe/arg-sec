@@ -65,7 +65,7 @@ pipeline{
                         sh """
                         latest=\$(aws s3 ls s3://ron-ben.moshe/ --recursive | sort | tail -n 1 | awk '{print \$4}')
                         aws s3 cp s3://ron-ben.moshe/\$latest test.txt
-                        [[ -s test.txt ]] && cat /tmp/test.txt || echo "File Empty"
+                        [ -s test.txt ] && cat /tmp/test.txt || echo "File Empty"
                         """
                     }
                 }
