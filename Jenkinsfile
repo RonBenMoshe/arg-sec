@@ -30,7 +30,7 @@ pipeline{
                         docker build -t 161192472568.dkr.ecr.us-east-1.amazonaws.com/ron-ben.moshe:${GITHUB_PR_NUMBER} .
                         mkdir -p /tmp/data
                         docker run -v /tmp/data:/tmp 161192472568.dkr.ecr.us-east-1.amazonaws.com/ron-ben.moshe:${GITHUB_PR_NUMBER}
-                        cat /tmp/data/test.txt
+                        ls /tmp/data/
                         docker tag 161192472568.dkr.ecr.us-east-1.amazonaws.com/ron-ben.moshe:${GITHUB_PR_NUMBER} 161192472568.dkr.ecr.us-east-1.amazonaws.com/ron-ben.moshe:latest
 
                     """
