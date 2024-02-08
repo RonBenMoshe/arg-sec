@@ -4,7 +4,7 @@ pipeline{
         stage('Print Webhook Payload'){
             steps{
             script{
-                echo "Webhook Payload: ${$.pull_request}"
+                echo "Webhook Payload: ${ghprbPullLink}"
             }
             }
         }
