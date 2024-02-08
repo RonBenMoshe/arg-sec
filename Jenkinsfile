@@ -32,8 +32,14 @@ pipeline{
                         docker run -v data:/tmp 161192472568.dkr.ecr.us-east-1.amazonaws.com/ron-ben.moshe:${GITHUB_PR_NUMBER}
                         ls /data
                         docker tag 161192472568.dkr.ecr.us-east-1.amazonaws.com/ron-ben.moshe:${GITHUB_PR_NUMBER} 161192472568.dkr.ecr.us-east-1.amazonaws.com/ron-ben.moshe:latest
-
                     """
+                    withAWS(credentials: 'Aws', region: 'us-east-1') {
+                        sh """
+                        aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 161192472568.dkr.ecr.us-east-1.amazonaws.com
+                        docker push -a 161192472568.dkr.ecr.us-east-1.amazonaws.com/ron-ben.moshe
+                        aws s3 cp /data/test.txt s3://ron-ben.moshe/pr_${GITHUB_PR_NUMBER}.txt
+                        """
+                    }
                 }
             }
         }
