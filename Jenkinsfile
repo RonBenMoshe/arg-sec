@@ -1,6 +1,6 @@
 properties(
     [parameters([
-        choise(name: 'StageToRun',choices: ['Build', 'Deploy'], description: 'Choose the stage to run when running the pipeline manually')
+        choice(name: 'StageToRun',choices: ['Build', 'Deploy'], description: 'Choose the stage to run when running the pipeline manually')
     ])])
 pipeline{
     agent any
